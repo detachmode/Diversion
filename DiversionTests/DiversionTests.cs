@@ -23,16 +23,16 @@ namespace Diversion.Tests
         [TestMethod()]
         public void buildAllPossiblePermutationsTest()
         {
-            var div = new Diversion();
-            div.createPermutations(2);
+            var div = new Diversion(2);
+            div.createPermutations();
 
             Assert.AreEqual(4, div.permutations.Count);
             Assert.AreEqual(true, div.permutations.Find(x => x == "00") != null);
             Assert.AreEqual(true, div.permutations.Find(x => x == "01") != null);
             Assert.AreEqual(true, div.permutations.Find(x => x == "11") != null);
 
-            div = new Diversion();
-            div.createPermutations(4);
+            div = new Diversion(4);
+            div.createPermutations();
             Assert.AreEqual(true, div.permutations.Find(x => x == "0001") != null);
 
         }
@@ -41,9 +41,17 @@ namespace Diversion.Tests
         public void appendBitRecursiveAndFinallyAddToPermutationsTest()
         {
             //var div = new Diversion();
-            //div.appendBitRecursiveAndFinallyAddToPermutations("","1",3);
+            //div.appendBit("","1",3);
 
             //Assert.AreEqual("11", div.permutations[1]);
+        }
+
+        [TestMethod()]
+        public void CreatePermutationIterativeTest()
+        {
+            var div = new Diversion(10);
+            var result =  div.CreatePermutationIterative(3);
+            Assert.Fail();
         }
     }
 }
