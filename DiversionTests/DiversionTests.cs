@@ -50,7 +50,7 @@ namespace Diversion.Tests
         public void CreatePermutationIterativeTest()
         {
             var div = new Diversion(10);
-            var result =  div.CreatePermutationIterative(3);
+            var result =  div.CreatePermutationsBinary(7);
             Assert.Fail();
         }
     }

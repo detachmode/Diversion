@@ -33,13 +33,32 @@ namespace Diversion
 
             workingList = CreateInitialList();
 
-            var liste = ModifyList(workingList, iterations: 3, newList: x => x.Select(AddAusrufezeichen).ToList());
+            ////var liste = ModifyList(workingList, iterations: 3, newList: x => x.Select(AddAusrufezeichen).ToList());
+            //     workingList = ModifyList(workingList, iterations: size-1, newList: NextBiggerPermutations);
 
-            workingList = ModifyList(workingList, iterations: size-1, newList: NextBiggerPermutations);
+
+            Enumerable.Range(0, size - 1).ToList().ForEach(x =>
+            {
+                workingList = NextBiggerPermutations(workingList);
+            });
 
             return workingList;
         }
-        
+
+        public List<string> CreatePermutationsBinary(int size)
+        {
+            var result = new List<string>();
+
+            for (int i = 0; i < Math.Pow(2, size); i++)
+            {
+                string binary = Convert.ToString(i, toBase: 2).PadLeft(size, '0');
+                result.Add(binary);
+                //result.Add(binary.Substring(0, size));
+            }
+
+            return result;
+        }
+
         private string AddAusrufezeichen(string y)
         {
             string str = "_";
@@ -52,14 +71,7 @@ namespace Diversion
             return y + str;
         }
 
-        private List<string> ModifyList(List<string> theList, int iterations, Func<List<string>, List<string>> newList)
-        {
-            for (int i = 0; i < iterations ; i++)
-            {
-                theList = newList(theList);
-            }
-            return theList;
-        }
+
 
         public List<string> NextBiggerPermutations(List<string> workingList)
         {
@@ -77,15 +89,6 @@ namespace Diversion
             return workingList;
         }
 
-        //private static List<string> AddCharToAllStrings(List<string> workingList, char c)
-        //{
-        //    var list1 = new List<string>();
-        //    foreach (string s in workingList)
-        //    {
-        //        list1.Add(s + c);
-        //    }
-        //    return list1;
-        //}
 
 
         private void PermutationConsumer(string str, int stillMissing)
